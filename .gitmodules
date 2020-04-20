@@ -1,0 +1,12 @@
+[submodule "basekernel"]
+	path = basekernel
+	url = ./basekernel
+[submodule "basekernel-P(RR)"]
+	path = basekernel-P(RR)
+	url = ./basekernel-P(RR)/
+[submodule "basekernel-dynP(RR)"]
+	path = basekernel-dynP(RR)
+	url = ./basekernel-dynP(RR)/
+[submodule "basekernel-P(FCFS)"]
+	path = basekernel-P(FCFS)
+	url = ./basekernel-P(FCFS)/

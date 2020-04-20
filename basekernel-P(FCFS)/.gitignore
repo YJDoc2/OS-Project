@@ -1,0 +1,11 @@
+*.o
+*.elf
+*.img
+*.iso
+*.a
+*.exe
+*~
+kernel/kernel
+kernel/bootblock
+cross
+.vscode
