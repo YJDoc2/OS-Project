@@ -1,0 +1,59 @@
+-> include/kernel/syscall.h :
+    -> Added  new Syscalls in enum : 
+        -> SYSCALL_CREATE_THREAD : for new thread creation
+	    -> SYSCALL_PROCESS_JOIN : To make a parent wait for child threads
+	    -> SYSCALL_GETCHAR_NBLK : to get a single character from keyboard
+
+-> include/library/syscalls.h :
+    -> Added method signatures for added syscalls :
+        -> int syscall_create_thread(void *loc,void *arg);
+        -> int syscall_process_join();
+        -> char syscall_getchar_nonblock();
+
+-> include/library/threads.h :
+    ->created this file and added methods for threads :
+        -> int create_thread(void *fn,void *arg);
+        -> int process_join();
+        -> inline static void thread_sleep(int ms);
+
+-> kernel/process.h :
+    -> Added fields in struct process fro threads
+    -> Added methods signatures for thread handling :
+        -> int process_join();
+        -> int thread_try_wakeup_parent(int parent_thread_id);
+
+-> kernel/process.c :
+    -> Changes allow_preempt to 1
+    -> modified process_exit function to kill a process' threads if the process is exiting but threads are still running.
+    -> Implemented process_join and thread_try_wakeup_parent functions
+    -> modified process_make_dead function for thread cleanup
+
+-> kernel/syscall_handler.c :
+    -> #include kernelcore.h to get reference to interrupt_stack_pointer
+    -> Implemented thread_run(), sys_create_thread() and sys_getchar_nonblock()
+    -> Added Cases for SYSCALL_CREATE_THREAD , SYSCALL_PROCESS_JOIN and SYSCALL_GETCHAR_NBLK in switch-case.
+
+-> library/syscalls.c :
+    -> Implemented functions for syscalls :
+        -> int syscall_create_thread(void *loc,void *arg);
+        -> int syscall_process_join();
+        -> char syscall_getchar_nonblock();
+
+-> library/threads.c :
+    -> created file and Implemented :
+        -> int create_thread()
+        -> int process_join()
+
+-> library/makefile :
+    -> Added threads.o in LIBRARY_OBJECTS
+
+-> user/
+    -> created files :
+        -> ttest.c
+        -> ttest2.c
+        -> ttest3.c
+	-> ttest4.c
+	-> ttest5.c
+    -> Added corresponding files in USER_PROGRAMS in makefile
+
+
